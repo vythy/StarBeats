@@ -1,23 +1,46 @@
-import React, { useState, useEffect, createContext } from "react";
-import { Outlet } from "react-router-dom";
-
-import jwt_decode from "jwt-decode";
+import React, { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber"
 
 import "../utilities.css";
 
-import { socket } from "../client-socket";
+import useLoginStore from "../shared/loginStore";
+import { get } from "../utilities";
 
-import { get, post } from "../utilities";
+import MainMenuPage from "./pages/MainMenuPage";
+import NotFound from "./pages/NotFound";
+import SongSelectPage from "./pages/SongSelectPage";
+import TutorialPage from "./pages/TutorialPage"
+import GamePage from "./pages/GamePage";
 
-export const UserContext = createContext(null);
+import MainMenuScene from "./scenes/MainMenuScene";
+import SongSelectScene from "./scenes/SongSelectScene";
+import GameScene from "./scenes/GameScene";
+
+
+import { Route, Switch } from "wouter"
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import useGameStore from "../shared/gameStore";
+
+//TODO: REPLACE WITH YOUR OWN CLIENT_ID
+const GOOGLE_CLIENT_ID = "163288036889-p2rlmd0mhikpsimr05lmb6jv77glr1sk.apps.googleusercontent.com";
+
+const CanvasStyles = {
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+  height: '100vh',
+  background: "white"
+};
 
 /**
  * Define the "App" component
  */
 const App = () => {
-  const [userId, setUserId] = useState(undefined);
+  const setUserId = useLoginStore((state) => state.setUserId);
+  const screenState = useGameStore((state) => state.screenState);
 
   useEffect(() => {
+    console.log("bingus")
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
@@ -26,31 +49,21 @@ const App = () => {
     });
   }, []);
 
-  const handleLogin = (credentialResponse) => {
-    const userToken = credentialResponse.credential;
-    const decodedCredential = jwt_decode(userToken);
-    console.log(`Logged in as ${decodedCredential.name}`);
-    post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
-    });
-  };
-
-  const handleLogout = () => {
-    setUserId(undefined);
-    post("/api/logout");
-  };
-
-  const authContextValue = {
-    userId,
-    handleLogin,
-    handleLogout,
-  };
-
   return (
-    <UserContext.Provider value={authContextValue}>
-      <Outlet />
-    </UserContext.Provider>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <Canvas style={CanvasStyles}>
+        {screenState==="MainMenu" && <MainMenuScene/>}
+        {screenState==="SongSelect" && <SongSelectScene/>}
+        {screenState==="Game" && <GameScene/>}
+      </Canvas>
+      <Switch>
+        <Route path="/" component={MainMenuPage}/>
+        <Route path="/song-select" component={SongSelectPage}/>
+        <Route path="/tutorial" component={TutorialPage}/>
+        <Route path="/game" component={GamePage}/>
+        <Route path="*" component={NotFound}/>
+      </Switch>
+    </GoogleOAuthProvider>
   );
 };
 
