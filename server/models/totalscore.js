@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const ScoreSchema = new mongoose.Schema({
-  googleid: String,
   totalscore: Number
 });
 

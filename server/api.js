@@ -106,7 +106,6 @@ router.post("/totalscore", (req, res) => {
   })
   .catch(err => {
     const newTotalScore = new Score({
-      googleid: req.body.userid,
       totalscore: req.body.addScoreAmount
     })
 
