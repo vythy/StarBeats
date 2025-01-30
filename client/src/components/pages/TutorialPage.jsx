@@ -1,13 +1,8 @@
 import React, { useEffect } from "react"
 import NavButton from "../ui/NavButton";
 
-import useGameStore from "../../shared/gameStore";
 
 const TutorialPage = () => {
-  const setScreenState = useGameStore((state) => state.setScreenState)
-
-  useEffect(() => setScreenState("Tutorial"), []);
-
   return (
       <div style={{position: "absolute", top: 0, left: 0}}>
         <h1>Tutorial</h1>

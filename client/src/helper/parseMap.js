@@ -1,5 +1,3 @@
-import lauvSong from "../songs/635189 Lauv - I like me better/Lauv - I like me better (Akkelobster).txt"
-
 import { useMemo } from "react"
 
 // i have 5 minutes rn to write this function so heres the stackoverflow copy for now lol

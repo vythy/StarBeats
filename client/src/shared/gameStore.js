@@ -1,14 +1,15 @@
 import { create } from 'zustand'
+import { useAudioPlayer } from "react-use-audio-player";
 
 const useGameStore = create((set) => ({
-    screenState: "MainMenu",
     gameStart: false,
-    songReady: false,
+    gameReady: false,
     songPosition: 0,
-    setScreenState: (state) => set({ screenState: state }),
+    selectedSong: "Lauv - I like me better",
     setGameStart: (state) => set({ gameStart: state }),
-    setSongReady: (state) => set({ songReady: state }),
-    setSongPosition: (state) => set({ songPosition: state})
+    setGameReady: (state) => set({ gameReady: state }),
+    setSongPosition: (state) => set({ songPosition: state}),
+    setSelectedSong: (state) => set({ selectedSong: state}),
 }))
 
 export default useGameStore;

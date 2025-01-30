@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Canvas } from "@react-three/fiber"
 
 import "../utilities.css";
 
@@ -12,14 +11,8 @@ import SongSelectPage from "./pages/SongSelectPage";
 import TutorialPage from "./pages/TutorialPage"
 import GamePage from "./pages/GamePage";
 
-import MainMenuScene from "./scenes/MainMenuScene";
-import SongSelectScene from "./scenes/SongSelectScene";
-import GameScene from "./scenes/GameScene";
-
-
 import { Route, Switch } from "wouter"
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import useGameStore from "../shared/gameStore";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "163288036889-p2rlmd0mhikpsimr05lmb6jv77glr1sk.apps.googleusercontent.com";
@@ -37,10 +30,8 @@ const CanvasStyles = {
  */
 const App = () => {
   const setUserId = useLoginStore((state) => state.setUserId);
-  const screenState = useGameStore((state) => state.screenState);
 
   useEffect(() => {
-    console.log("bingus")
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
@@ -51,11 +42,6 @@ const App = () => {
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <Canvas style={CanvasStyles}>
-        {screenState==="MainMenu" && <MainMenuScene/>}
-        {screenState==="SongSelect" && <SongSelectScene/>}
-        {screenState==="Game" && <GameScene/>}
-      </Canvas>
       <Switch>
         <Route path="/" component={MainMenuPage}/>
         <Route path="/song-select" component={SongSelectPage}/>

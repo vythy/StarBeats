@@ -5,19 +5,17 @@ import "../../utilities.css";
 import "./MainMenuPage.css";
 
 import useLoginStore from "../../shared/loginStore";
-import useGameStore from "../../shared/gameStore";
 
 import NavButton from "../ui/NavButton";
 import jwt_decode from "jwt-decode";
 import { socket } from "../../client-socket";
 import { get, post } from "../../utilities";
 
+import MainMenuScene from "../scenes/MainMenuScene";
+
 const MainMenuPage = () => {
   const userId = useLoginStore((state) => state.userId);
   const setUserId = useLoginStore((state) => state.setUserId);
-  const setScreenState = useGameStore((state) => state.setScreenState)
-  
-  useEffect(() => setScreenState("MainMenu"), []);
 
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
@@ -35,23 +33,26 @@ const MainMenuPage = () => {
   };
 
   return (
-    <div className="wrapper">
-      <h1 style={{backgroundColor: 'white'}}>Trust, The Final UI Will Look a Lot Better LOL</h1>
-      {userId ? (
-        <button
-          onClick={() => {
-            googleLogout();
-            handleLogout();
-          }}
-        >
-          Logout
-        </button>
-      ) : (
-        <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
-      )}
-      <NavButton destination="/song-select" prompt="Start"/>
-      <NavButton destination="/tutorial" prompt="Tutorial"/>
-    </div>
+    <>
+      <MainMenuScene/>
+      <div className="wrapper">
+        <h1 style={{backgroundColor: 'white'}}>Trust, The Final UI Will Look a Lot Better LOL</h1>
+        {userId ? (
+          <button
+            onClick={() => {
+              googleLogout();
+              handleLogout();
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
+        )}
+        <NavButton destination="/song-select" prompt="Start"/>
+        <NavButton destination="/tutorial" prompt="Tutorial"/>
+      </div>
+    </>
   );
 };
 
