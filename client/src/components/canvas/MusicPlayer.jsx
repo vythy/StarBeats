@@ -2,11 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
 
 import useGameStore from "../../shared/gameStore";
+import useLoginStore from "../../shared/loginStore";
+import { post } from "../../utilities";
 
 const MusicPlayer = () => {
     const selectedSong = useGameStore((state) => state.selectedSong)
     const startButtonRef = useRef(null)
     const setGameStart = useGameStore((state) => state.setGameStart)
+    const mapScore = useGameStore((state) => state.score)
+
+    const userId = useLoginStore((state) => state.userId)
 
     const { load, stop } = useGlobalAudioPlayer()
 
@@ -14,6 +19,7 @@ const MusicPlayer = () => {
     const onEnd = () => {
         setGameStart(false)
         stop()
+        post("/api/score", { userid: userId, addScoreAmount: mapScore})
     }
 
     const handleSongPlayButton = () => {

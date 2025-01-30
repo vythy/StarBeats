@@ -1,11 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei"
+import { Stars } from "@react-three/drei"
 
 const SongSelectScene = () => {
     return (
     <Canvas>
-        <Environment preset="forest" background/>
-        <OrbitControls/>
+        <Stars fade speed={3}/>
     </Canvas>
     )
 }

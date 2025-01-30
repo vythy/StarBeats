@@ -11,6 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Score = require("./models/totalscore")
 
 // import authentication library
 const auth = require("./auth");
@@ -21,9 +22,6 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline")
-
-//initialize socket
-const socketManager = require("./server-socket");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -36,12 +34,6 @@ router.get("/whoami", (req, res) => {
   res.send(req.user);
 });
 
-router.post("/initsocket", (req, res) => {
-  // do nothing if user not logged in
-  if (req.user)
-    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
-  res.send({});
-});
 
 // |------------------------------|
 // | write your API methods below!|
@@ -94,10 +86,30 @@ router.get("/request-song", async (req, res) => {
     }
 
     res.json({ mapObjects: mapObjects })
-    // res.json({ mapObjects: [[[0,0,0], 2, 1000]]})
   } catch (error) {
     res.status(500).send("song processing error")
   }
+})
+
+router.get("/score", (req, res) => {
+  Score.findById(req.query.userid).then((totalscore) => {
+    res.send(totalscore)
+  })
+})
+
+router.post("/score", (req, res) => {
+  Score.findById(req.body.userid).then((totalscore) => {
+    totalscore.totalscore += req.body.addScoreAmount
+    totalscore.save()
+  })
+  .catch(err => {
+    const newTotalScore = new Score({
+      googleid: req.body.userid,
+      totalscore: req.body.addScoreAmount
+    })
+
+    newTotalScore.save()
+  })
 })
 
 // anything else falls to this "not found" case

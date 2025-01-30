@@ -1,12 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../../utilities.css";
 import "./SongSelectPage.css"
 import NavButton from "../ui/NavButton";
 
 import SongSelectScene from "../scenes/SongSelectScene";
+import SongLink from "../ui/songLink";
+import useLoginStore from "../../shared/loginStore";
+
+import { get } from "../../utilities";
 
 const SongSelectPage = () => {
+  const userId = useLoginStore((state) => state.userId)
+  const [ score, setScore ] = useState(0)
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     get("/api/totalscore", {userid: userId}).then((totalscore) => {
+  //         setScore(totalscore.totalscore);
+  //     })
+  //   }
+  // }, [])
+
   return (
     <>
       <SongSelectScene/>
@@ -14,9 +29,9 @@ const SongSelectPage = () => {
         <NavButton destination="/" prompt="Back"/>
       </div>
       <div className="song-select-box">
-        <h1>Lauv - I Like Me Better</h1>
-        <img alt="oops Lauv broke" style={{width: 510, height: "auto"}}/>
-        <NavButton destination="/game" prompt="Play!"/>
+        {userId && <h1>Total Score: {score} </h1>}
+        <SongLink songName={"succducc - me & u"} songFileName={"succducc - me & u"}/>
+        <SongLink songName={"Lauv - I Like Me Better"} songFileName={"Lauv - I like me better"}/>
       </div>
     </>
   );

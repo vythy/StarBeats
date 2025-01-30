@@ -50,6 +50,7 @@ const Note = ({ position, lane, hitTimeStamp }) => {
                         noteRef.current.color = missColor
                     } else if (timeDiff <= 70) {
                         noteRef.current.color = perfectColor
+                        gameStore.incrementScore()
                     }
                 }
             }

@@ -8,7 +8,6 @@ import useLoginStore from "../../shared/loginStore";
 
 import NavButton from "../ui/NavButton";
 import jwt_decode from "jwt-decode";
-import { socket } from "../../client-socket";
 import { get, post } from "../../utilities";
 
 import MainMenuScene from "../scenes/MainMenuScene";
@@ -23,7 +22,6 @@ const MainMenuPage = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
     });
   };
 
@@ -36,7 +34,7 @@ const MainMenuPage = () => {
     <>
       <MainMenuScene/>
       <div className="wrapper">
-        <h1 style={{backgroundColor: 'white'}}>Trust, The Final UI Will Look a Lot Better LOL</h1>
+        <h1 style={{color: "blue"}}>VSRG Star</h1>
         {userId ? (
           <button
             onClick={() => {

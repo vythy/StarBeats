@@ -4,10 +4,10 @@ import "../../utilities.css";
 
 import { Link } from "wouter";
 
-const NavButton = ({ destination, prompt }) => {
+const NavButton = ({ destination, prompt, callback=()=>{}}) => {
   return (
     <Link to={destination}>
-      <button>{prompt}</button>
+      <button onClick={callback}>{prompt}</button>
     </Link>
   )
 } 
