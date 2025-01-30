@@ -22,7 +22,6 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
-const totalscore = require("./models/totalscore");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -41,7 +40,6 @@ router.get("/whoami", (req, res) => {
 // |------------------------------|
 
 router.get("/request-song", async (req, res) => {
-  console.log("bingus")
   try {
     const filePath = path.join(__dirname, "Maps", req.query.songName+".osu")
 

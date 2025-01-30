@@ -35,10 +35,12 @@ const SongSelectPage = () => {
         {userId && <h1>Total Score: {score} </h1>}
         <SongLink songName={"Coldplay - A Sky Full of Stars (Easy)"} songFileName={"Coldplay - A Sky Full of Stars"}/>
         <SongLink songName={"keshi - beside you (Intermediate)"} songFileName={"keshi - beside you"}/>
+        <SongLink songName={"Tomatoism - Someone Special (Intermediate)"} songFileName={"Tomatoism - Someone Special"}/>
+        <SongLink songName={"succducc - me & u (Hard) [Creator Favorite]"} songFileName={"succducc - me & u"}/>
         <SongLink songName={"Lauv - I Like Me Better (Hard)"} songFileName={"Lauv - I like me better"}/>
-        <SongLink songName={"succducc - me & u (Hard)"} songFileName={"succducc - me & u"}/>
         <SongLink songName={"Zedd - Queensland Clarity (Hyper)"} songFileName={"Zedd - Queensland Clarity"}/>
-        <SongLink songName={"DJ Noriken - Turn It Up (feat. Kanae Asaba) (Impossible)"} songFileName={"DJ Noriken - Turn It Up (feat. Kanae Asaba)"}/>
+        <SongLink songName={"DJ Noriken - Turn It Up (feat. Kanae Asaba) (Hyper)"} songFileName={"DJ Noriken - Turn It Up (feat. Kanae Asaba)"}/>
+        <SongLink songName={"Camellia - We Could Get More Machinegun Psystyle! (Ultra Hyper)"} songFileName={"Camellia - We Could Get More Machinegun Psystyle!"}/>
       </div>
     </>
   );
