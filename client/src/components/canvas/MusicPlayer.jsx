@@ -19,7 +19,7 @@ const MusicPlayer = () => {
     const onEnd = () => {
         setGameStart(false)
         stop()
-        post("/api/score", { userid: userId, addScoreAmount: mapScore})
+        post("/api/totalscore", { userid: userId, addScoreAmount: mapScore})
     }
 
     const handleSongPlayButton = () => {

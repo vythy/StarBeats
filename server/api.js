@@ -92,7 +92,7 @@ router.get("/request-song", async (req, res) => {
   }
 })
 
-router.get("/score", (req, res) => {
+router.get("/totalscore", (req, res) => {
   Score.findById(req.query.userid).then((totalscore) => {
     res.send(totalscore)
   })
@@ -101,7 +101,7 @@ router.get("/score", (req, res) => {
   })
 })
 
-router.post("/score", (req, res) => {
+router.post("/totalscore", (req, res) => {
   Score.findById(req.body.userid).then((totalscore) => {
     totalscore.totalscore += req.body.addScoreAmount
     totalscore.save()

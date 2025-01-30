@@ -38,6 +38,7 @@ const SongSelectPage = () => {
         <SongLink songName={"Lauv - I Like Me Better (Hard)"} songFileName={"Lauv - I like me better"}/>
         <SongLink songName={"succducc - me & u (Hard)"} songFileName={"succducc - me & u"}/>
         <SongLink songName={"Zedd - Queensland Clarity (Hyper)"} songFileName={"Zedd - Queensland Clarity"}/>
+        <SongLink songName={"DJ Noriken - Turn It Up (feat. Kanae Asaba) (Impossible)"} songFileName={"DJ Noriken - Turn It Up (feat. Kanae Asaba)"}/>
       </div>
     </>
   );
