@@ -30,8 +30,10 @@ const SongSelectPage = () => {
       </div>
       <div className="song-select-box">
         {userId && <h1>Total Score: {score} </h1>}
-        <SongLink songName={"succducc - me & u"} songFileName={"succducc - me & u"}/>
-        <SongLink songName={"Lauv - I Like Me Better"} songFileName={"Lauv - I like me better"}/>
+        <SongLink songName={"Coldplay - A Sky Full of Stars (Easy)"} songFileName={"Coldplay - A Sky Full of Stars"}/>
+        <SongLink songName={"keshi - beside you (Intermediate)"} songFileName={"keshi - beside you"}/>
+        <SongLink songName={"Lauv - I Like Me Better (Hard)"} songFileName={"Lauv - I like me better"}/>
+        <SongLink songName={"succducc - me & u (Hard)"} songFileName={"succducc - me & u"}/>
       </div>
     </>
   );
