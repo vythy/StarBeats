@@ -21,7 +21,8 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
-const readline = require("readline")
+const readline = require("readline");
+const totalscore = require("./models/totalscore");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -94,6 +95,9 @@ router.get("/request-song", async (req, res) => {
 router.get("/score", (req, res) => {
   Score.findById(req.query.userid).then((totalscore) => {
     res.send(totalscore)
+  })
+  .catch(err => {
+    res.send({totalscore: 0})
   })
 })
 

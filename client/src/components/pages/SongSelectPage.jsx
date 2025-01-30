@@ -14,13 +14,16 @@ const SongSelectPage = () => {
   const userId = useLoginStore((state) => state.userId)
   const [ score, setScore ] = useState(0)
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     get("/api/totalscore", {userid: userId}).then((totalscore) => {
-  //         setScore(totalscore.totalscore);
-  //     })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (userId) {
+      get("/api/totalscore", {userid: userId}).then((totalscore) => {
+          setScore(totalscore.totalscore);
+      })
+      .catch(err => {
+        setScore(0)
+      })
+    }
+  }, [])
 
   return (
     <>
@@ -34,6 +37,7 @@ const SongSelectPage = () => {
         <SongLink songName={"keshi - beside you (Intermediate)"} songFileName={"keshi - beside you"}/>
         <SongLink songName={"Lauv - I Like Me Better (Hard)"} songFileName={"Lauv - I like me better"}/>
         <SongLink songName={"succducc - me & u (Hard)"} songFileName={"succducc - me & u"}/>
+        <SongLink songName={"Zedd - Queensland Clarity (Hyper)"} songFileName={"Zedd - Queensland Clarity"}/>
       </div>
     </>
   );
