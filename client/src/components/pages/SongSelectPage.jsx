@@ -5,7 +5,7 @@ import "./SongSelectPage.css"
 import NavButton from "../ui/NavButton";
 
 import SongSelectScene from "../scenes/SongSelectScene";
-import SongLink from "../ui/songLink";
+import SongLink from "../ui/SongLink";
 import useLoginStore from "../../shared/loginStore";
 
 import { get } from "../../utilities";
