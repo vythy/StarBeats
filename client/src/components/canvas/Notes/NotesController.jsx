@@ -9,28 +9,28 @@ import { useGlobalAudioPlayer, useAudioPlayer } from "react-use-audio-player";
 import { useFrame } from "@react-three/fiber";
 
 const NotesController = () => {
-    const gameStart = useGameStore((state) => state.gameStart)
-    const selectedSong = useGameStore((state) => state.selectedSong)
+    const gameStart = useGameStore((state) => state.gameStart);
+    const selectedSong = useGameStore((state) => state.selectedSong);
     const [mapObjects, setMapObjects] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
 
-    const { getPosition } = useGlobalAudioPlayer()
+    const { getPosition } = useGlobalAudioPlayer();
 
     useEffect(() => {
         get("/api/request-song", {songName: selectedSong}).then((songData) => {
             setMapObjects(songData.mapObjects);
-            setIsLoading(false)
+            setIsLoading(false);
         })
 
         return () => {
-            setIsLoading(true)
-            setMapObjects([])
+            setIsLoading(true);
+            setMapObjects([]);
         }
     }, [selectedSong, gameStart]);
 
     useFrame(() => {
-        useGameStore.getState().setSongPosition(getPosition()*1000)
-    })
+        useGameStore.getState().setSongPosition(getPosition()*1000);
+    });
 
     if (isLoading) return
     return (
