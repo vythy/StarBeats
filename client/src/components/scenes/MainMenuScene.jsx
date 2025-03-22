@@ -14,6 +14,7 @@ const Constellations = () => {
     useEffect(() => {
         axios.get("/shaders/menu/constellations.vert").then((res) => setConstellationVertex(res.data));
         axios.get("/shaders/menu/constellations.frag").then((res) => setConstellationFragment(res.data));
+        console.log("constellation mounted");
     }, []);
 
     useFrame((state) => { 

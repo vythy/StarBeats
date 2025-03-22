@@ -49,7 +49,7 @@ void main()
         //Attentuate outward
         / length(suv
         //Set the star position
-        + .07*cos(w/.31+vec2(0,5))*sqrt(i));
+        + .08*cos(w*.31+vec2(0,5))*sqrt(i));
     }
     
     //Increase contrast
