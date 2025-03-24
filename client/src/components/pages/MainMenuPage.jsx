@@ -34,7 +34,7 @@ const MainMenuPage = () => {
     <>
       <MainMenuScene/>
       <div className="wrapper">
-        <h1 style={{color: "white"}}>VSRG Star</h1>
+        <h1 style={{color: "white"}}>VRSG Star</h1>
         {userId ? (
           <button
             onClick={() => {
